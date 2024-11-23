@@ -1,0 +1,53 @@
+# global
+name: 'xtra-b-imagenet1k'
+module: classifier
+pretrained: './aimos/xtra_b-in1k_pt-warmup_15-800_epochs-dpr_0.1-bs2k-12x6GPUs/epoch=799-step=490400.ckpt'
+rm_pt_param:
+  - 'predictor'
+  - 'proj'
+  - 'aim'
+
+cls:
+  mode: linear
+  num_classes: 1000
+  n_last_blocks: 1
+  avgpool_patchtokens: True
+  avgpool_layers: False
+  out_bn: True
+
+# trainer
+trainer:
+  max_epochs: 100
+  precision: 'bf16-mixed'
+  gradient_clip_val: 3.0
+  accumulate_grad_batches: 4
+  num_sanity_val_steps: 0
+
+# encoder
+enc_arch: 'vit_base'
+
+# optimizer
+optimizer:
+  adam:
+    lr: 5.0e-4
+    weight_decay: 0.0
+  8bit: False
+
+scheduler:
+  cosine:
+    warmup_start_lr: 5.0e-5
+    warmup_epochs: 10
+    eta_min: 1.0e-5
+
+# dataset
+dataset:
+  imagenet1k:
+    use: True
+
+train:
+  batch_size: 1024
+  transform:
+    rand_size_scale: [ 0.08, 1.0 ]
+    rand_size_ratio: [ 0.75, 1.333334 ]
+val:
+  batch_size: 1024

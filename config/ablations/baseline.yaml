@@ -1,0 +1,61 @@
+# global
+name: 'xtra-b-ablations-pt'
+
+# trainer
+trainer:
+  max_epochs: 100
+  precision: '16-mixed'
+  gradient_clip_val: 1.0
+  accumulate_grad_batches: 1
+  num_sanity_val_steps: 0
+
+# encoder
+enc_arch: 'vit_base'
+
+# projection
+proj:
+  hidden_dim: 4096
+  out_dim: 384
+  in_bn: False
+  nlayers: 2
+
+# predictor
+predictor:
+  num_heads: 6
+  depth: 8
+
+# auto-regressive image modelling
+aim:
+  num_tokens: 1
+  norm_pix_loss: True
+  alpha: 1.0
+  proj:
+    hidden_dim: 6144
+    in_bn: False
+    nlayers: 2
+    out_bias: True
+
+# optimizer
+optimizer:
+  adam:
+    lr: 1.0e-3
+    weight_decay: 0.05
+    betas: [ 0.9, 0.95 ]
+  8bit: False
+
+scheduler:
+  cosine:
+    warmup_start_lr: 1.0e-4
+    warmup_epochs: 10
+    eta_min: 1.0e-6
+
+# dataset
+dataset:
+  imagenet1k:
+    use: True
+
+train:
+  batch_size: 114
+
+val:
+  batch_size: 114

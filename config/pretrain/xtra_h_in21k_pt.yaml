@@ -1,0 +1,69 @@
+# global
+name: 'xtra-h-in21k-pt'
+
+# periodic checkpoint
+periodic_checkpoint:
+  save_top_k: -1
+  verbose: True
+  every_n_epochs: 10
+
+# trainer
+trainer:
+  max_epochs: 100
+  precision: '16-mixed'
+  gradient_clip_val: 1.0
+  accumulate_grad_batches: 1
+  num_sanity_val_steps: 0
+
+deepspeed_strategy:
+  stage: 0
+
+# encoder
+enc:
+  arch: 'vit_huge'
+  img_size: [ 224 ]
+  patch_size: 14
+  drop_path_rate: 0.2
+
+# projection
+proj:
+  hidden_dim: 5120
+  out_dim: 640
+  in_bn: False
+  nlayers: 2
+
+# predictor
+predictor:
+  num_heads: 8
+  depth: 8
+
+# auto-regressive image modelling
+aim:
+  num_tokens: 1
+  norm_pix_loss: True
+  alpha: 1.0
+  proj:
+    hidden_dim: 9408
+    in_bn: False
+    nlayers: 2
+    out_bias: True
+
+scheduler:
+  cosine:
+    warmup_epochs: 3
+
+# dataset
+dataset:
+  imagenet21k:
+    use: True
+
+train:
+  transform:
+    rand_size: 224
+  batch_size: 29
+
+val:
+  transform:
+    resize: 256
+    center_crop: 224
+  batch_size: 29

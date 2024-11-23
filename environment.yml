@@ -1,0 +1,31 @@
+# to create a new environment use: conda env create -f environment.yml
+# to update a current environment use: conda env update -f environment.yml
+name: xtra
+channels:
+  - defaults
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python>=3.11
+  - numpy>=1.25
+  - pip
+  - pytorch::pytorch-cuda>=11.8
+  - pytorch::pytorch>=2.0
+  - pytorch::torchvision>=0.15
+  - pytorch::torchaudio>=2.0
+  - pandas>=1.5
+  - datasets>=2.18
+  - pip:
+    - lightning
+    - lightning-bolts
+    - clearml
+    - scikit-learn
+    - tensorboard
+    - torchmetrics
+    - timm
+    - opencv-python
+    - flash-attn
+    - h5py
+    - gdown
+    - wilds

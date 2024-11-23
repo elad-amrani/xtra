@@ -1,0 +1,149 @@
+# global
+seed: 0
+
+# model checkpoint
+checkpoint:
+  verbose: True
+  save_top_k: 0
+
+# periodic checkpoint
+periodic_checkpoint:
+  save_top_k: 0
+  verbose: True
+  every_n_epochs: 10
+
+# trainer
+trainer:
+  max_epochs: 600
+  precision: 'bf16-mixed'
+  gradient_clip_val: 1.0
+  accumulate_grad_batches: 1
+
+# encoder
+enc:
+  arch: 'vit_base'
+  img_size: [ 256 ]
+  is_block_causal: True
+  block_size: 4
+
+# projection
+proj:
+  hidden_dim: 4096
+  out_dim: 768
+  in_bn: False
+  nlayers: 2
+
+# predictor
+predictor:
+  is_block_causal: True
+  block_size: 4
+  num_heads: 6
+  depth: 8
+
+# auto-regressive image modelling
+aim:
+  num_tokens: 1
+  norm_pix_loss: True
+  alpha: 1.0
+  proj:
+    hidden_dim: 6144
+    in_bn: False
+    nlayers: 2
+    out_bias: True
+
+# optimizer
+optimizer:
+  adam:
+    lr: 1.0e-3
+    weight_decay: 0.05
+    betas: [ 0.9, 0.95 ]
+  8bit: False
+
+scheduler:
+  cosine:
+    warmup_start_lr: 1.0e-4
+    warmup_epochs: 40
+    eta_min: 1.0e-6
+
+# dataset
+num_workers: 16
+dataset:
+  imagenet1k:
+    use: False
+    train:
+      root: './data/imagenet/train/'
+    val:
+      root: './data/imagenet/val/'
+  imagenet21k:
+    use: False
+    root: './data/imagenet21k/'
+  cifar100:
+    use: False
+    root: './data/cifar100/'
+  cifar10:
+    use: False
+    root: './data/cifar10/'
+  food101:
+    use: False
+    root: './data/food101/'
+  inat18:
+    use: False
+    train:
+      root: './data/inat18/train'
+    val:
+      root: './data/inat18/val'
+  dtd:
+    use: False
+    root: './data/dtd/'
+  cars:
+    use: False
+    root: './data/cars/'
+  pets:
+    use: False
+    root: './data/pets/'
+  eurosat:
+    use: False
+    root: './data/eurosat/'
+  pcam:
+    use: False
+    root: './data/pcam/'
+  camelyon17:
+    use: False
+    root: './data/camelyon17/'
+  fmow:
+    use: False
+    root: './data/fmow/'
+  ig:
+    use: False
+    root: './data/infograph/'
+    train:
+      txt_path: './data/infograph/infograph_train.txt'
+    val:
+      txt_path: './data/infograph/infograph_test.txt'
+  iwildcam:
+    use: False
+    root: './data/iwildcam/'
+  rxrx1:
+    use: False
+    root: './data/rxrx1/'
+
+train:
+  transform:
+    rand_size: 256
+    rand_size_scale: [ 0.3, 1.0 ]
+    rand_size_ratio: [ 0.75, 1.5 ]
+    rand_horizontal_flip: 0.5
+  batch_size: 114
+  pin_memory: True
+
+val:
+  transform:
+    resize: 300
+    center_crop: 256
+  batch_size: 114
+  pin_memory: True
+
+# ClearML
+clearml:
+  project_name: 'Amrani/XTRA'
+  continue_last_task: True

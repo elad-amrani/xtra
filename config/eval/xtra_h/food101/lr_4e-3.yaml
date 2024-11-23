@@ -1,0 +1,69 @@
+# global
+name: 'xtra-h-food101'
+module: classifier
+pretrained: './aimos/xtra_h-in21k_pt-dpr_0.2-pred_width_640-proj_9408-bs2k-12x6GPUs/epoch=99-step=629900.ckpt/checkpoint/mp_rank_00_model_states.pt'
+rm_pt_param:
+  - 'predictor'
+  - 'proj'
+  - 'aim'
+
+cls:
+  mode: linear
+  num_classes: 101
+  n_last_blocks: 6
+  avgpool_patchtokens: False
+  avgpool_layers: True
+
+attentive_pooling:
+  num_heads: 16
+  num_queries: 1
+
+# trainer
+trainer:
+  max_epochs: 100
+  precision: 'bf16-mixed'
+  gradient_clip_val: 3.0
+  accumulate_grad_batches: 1
+  num_sanity_val_steps: 0
+
+# encoder
+enc:
+  arch: 'vit_huge'
+  img_size: [ 224 ]
+  patch_size: 14
+
+# optimizer
+optimizer:
+  adam:
+    lr: 4.0e-3
+    weight_decay: 0.1
+  8bit: False
+
+scheduler:
+  cosine:
+    warmup_start_lr: 4.0e-4
+    warmup_epochs: 0
+    eta_min: 1.0e-5
+
+# dataset
+dataset:
+  food101:
+    use: True
+
+train:
+  batch_size: 512
+  transform:
+    use_timm: True
+    timm:
+      input_size: 224
+      is_training: True
+      auto_augment: 'rand-m9-mstd0.5-inc1'
+      interpolation: 'bicubic'
+      re_prob: 0.25
+      re_mode: 'pixel'
+      re_count: 1
+val:
+  transform:
+    resize: 256
+    center_crop: 224
+  batch_size: 512
