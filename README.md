@@ -1,5 +1,5 @@
-# XTRA: Scalable _and_ Sample-Efficient Auto-Regressive Image Models
-Official PyTorch (Lightning) implementation and pretrained/finetuned models of the paper _Scalable _and_ Sample-Efficient Auto-Regressive Image Models_.
+# XTRA: Sample- and Parameter-Efficient Auto-Regressive Image Models
+Official PyTorch (Lightning) implementation and pretrained/finetuned models of the paper _Sample- and Parameter-Efficient Auto-Regressive Image Models_.
 
 ## Installation
     conda env create -f environment.yml
