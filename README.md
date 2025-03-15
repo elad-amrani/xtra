@@ -1,5 +1,6 @@
+[![arXiv](https://img.shields.io/badge/arXiv-2411.15648-b31b1b.svg)](https://arxiv.org/abs/2411.15648) [![CVPR 2025](https://img.shields.io/badge/CVPR-2025-blue)](https://cvpr.thecvf.com/)
 # XTRA: Sample- and Parameter-Efficient Auto-Regressive Image Models
-Official PyTorch (Lightning) implementation and pretrained/finetuned models of the paper _Sample- and Parameter-Efficient Auto-Regressive Image Models_.
+Official PyTorch (Lightning) implementation and pretrained/finetuned models of the paper _Sample- and Parameter-Efficient Auto-Regressive Image Models_ from CVPR 2025.
 
 ## Installation
     conda env create -f environment.yml
@@ -9,7 +10,7 @@ Official PyTorch (Lightning) implementation and pretrained/finetuned models of t
 XTRA is a self-supervised auto-regressive vision model that leverages a Block Causal Mask to enhance sample and parameter efficiency. Empirical results demonstrate that this approach enables XTRA to learn abstract and semantically meaningful representations using less data and smaller model sizes. More specifically:
 
 1. XTRA is sample efficient. Although trained on 152x fewer samples (13.1M vs. 2B), XTRA ViT-H/14 outperforms the previous state-of-the-art auto-regressive model of the same size in top-1 average accuracy across 15 diverse image recognition benchmarks. 
-1. XTRA is parameter efficient. XTRA ViT-B/16 outperforms auto-regressive models trained on ImageNet-1k in linear and attentive probing tasks, while using 7–16$x fewer parameters (85M vs. 1.36B/0.63B).
+1. XTRA is parameter efficient. XTRA ViT-B/16 outperforms auto-regressive models trained on ImageNet-1k in linear and attentive probing tasks, while using 7–16x fewer parameters (85M vs. 1.36B/0.63B).
 
 <p align="center">
 <img src="graphics/arch.jpg" width="80%">
