@@ -1,4 +1,4 @@
-[![arXiv](https://img.shields.io/badge/arXiv-2411.15648-b31b1b.svg)](https://arxiv.org/abs/2411.15648) [![CVPR 2025](https://img.shields.io/badge/CVPR-2025-blue)](https://cvpr.thecvf.com/)
+[![arXiv](https://img.shields.io/badge/arXiv-2411.15648-b31b1b.svg)](https://arxiv.org/abs/2411.15648) [![CVPR 2025](https://img.shields.io/badge/CVPR-2025-blue)](https://openaccess.thecvf.com/content/CVPR2025/papers/Amrani_Sample-_and_Parameter-Efficient_Auto-Regressive_Image_Models_CVPR_2025_paper.pdf)
 # XTRA: Sample- and Parameter-Efficient Auto-Regressive Image Models
 Official PyTorch (Lightning) implementation and pretrained/finetuned models of the paper _Sample- and Parameter-Efficient Auto-Regressive Image Models_ from CVPR 2025.
 
